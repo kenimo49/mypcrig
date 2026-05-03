@@ -144,6 +144,5 @@ NVIDIA 系との違いはこんな感じです：
 ## 関連記事
 
 - [AI開発向けPC 記事一覧](/ai-dev/)
-- AI/LLM の選び方や使いこなしについては [kenimoto.dev](https://kenimoto.dev) のブログも参考になります。
 
-法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.com) へ。
+法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。
