@@ -64,7 +64,6 @@ const reviews = all.filter((p) => p.data.category === 'review');
 const guides = all.filter((p) => p.data.category === 'guide');
 const benchmarks = all.filter((p) => p.data.category === 'benchmark');
 const comparisons = all.filter((p) => p.data.category === 'comparison');
-const columns = all.filter((p) => p.data.category === 'column');
 const top = rankings.slice(0, 3);
 
 const fmtDate = (d: Date) =>
@@ -81,7 +80,6 @@ const sectionList = [
   ['guide', '選び方ガイド', guides],
   ['benchmark', 'ベンチマーク', benchmarks],
   ['comparison', '比較', comparisons],
-  ['column', 'コラム', columns],
 ] as const;
 ---
 

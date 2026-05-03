@@ -15,7 +15,6 @@ const blog = defineCollection({
       'guide',
       'benchmark',
       'comparison',
-      'column',
     ]).default('guide'),
     section: z.enum([
       'laptop',
