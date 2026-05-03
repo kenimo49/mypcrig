@@ -7,6 +7,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.date(),
+    updated: z.date().optional(),
     lang: z.enum(['ja', 'en']).default('ja'),
     category: z.enum([
       'ranking',
@@ -34,6 +35,19 @@ const blog = defineCollection({
     })).default([]),
     og_image: z.string().optional(),
     affiliate_disclosure: z.boolean().default(true),
+
+    // ランキング/レビュー型の追加メタデータ
+    score: z.number().min(0).max(10).optional(),
+    score_label: z.string().optional(),
+    pros: z.array(z.string()).default([]),
+    cons: z.array(z.string()).default([]),
+    verdict: z.string().optional(),
+    summary_specs: z.array(z.object({
+      label: z.string(),
+      value: z.string(),
+    })).default([]),
+    price_yen: z.number().optional(),
+    purchase_url: z.string().url().optional(),
   }),
 });
 

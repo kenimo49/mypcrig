@@ -20,12 +20,21 @@ const canonicalUrl = `https://mypcrig.com/blog/${slug}`;
   title={post.data.title}
   description={post.data.description}
   date={post.data.date}
+  updated={post.data.updated}
   category={post.data.category}
   section={post.data.section}
   tags={post.data.tags}
   canonical={canonicalUrl}
   ogImage={post.data.og_image}
   affiliateDisclosure={post.data.affiliate_disclosure}
+  score={post.data.score}
+  scoreLabel={post.data.score_label}
+  pros={post.data.pros}
+  cons={post.data.cons}
+  verdict={post.data.verdict}
+  summarySpecs={post.data.summary_specs}
+  priceYen={post.data.price_yen}
+  purchaseUrl={post.data.purchase_url}
 >
   <Content />
 </BlogLayout>

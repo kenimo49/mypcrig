@@ -8,36 +8,43 @@ export async function getStaticPaths() {
       slug: 'laptop',
       title: 'ノートPC',
       description: '学生・ビジネス・クリエイター向けノートPCの選び方とランキング',
+      headline: '軽量 / バッテリー / 性能',
     },
     {
       slug: 'gaming',
       title: 'ゲーミングPC',
       description: 'FPS / MMO / 配信に最適な構成。予算別ランキング',
+      headline: 'FPS / MMO / 配信',
     },
     {
       slug: 'ai-dev',
       title: 'AI開発向け',
       description: 'ローカルLLM / Claude Code / AI画像生成の実機ベンチマーク',
+      headline: 'ローカルLLMが動くPC',
     },
     {
       slug: 'mac',
       title: 'Mac',
       description: 'Apple Silicon の選び方。M3 / M4 シリーズ徹底比較',
+      headline: 'Apple Silicon',
     },
     {
       slug: 'desktop',
       title: 'デスクトップ',
       description: 'BTO・自作の構成提案。拡張性と静音性のバランス',
+      headline: 'BTO / 自作',
     },
     {
       slug: 'parts',
       title: 'パーツ単体',
       description: 'GPU / CPU / メモリの単品レビューと比較',
+      headline: 'GPU / CPU / メモリ',
     },
     {
       slug: 'column',
       title: 'コラム',
       description: '雑学・基礎知識。スペックの読み方を体系的に',
+      headline: '基礎から学ぶ',
     },
   ];
 
@@ -48,35 +55,140 @@ export async function getStaticPaths() {
 }
 
 const { sectionMeta } = Astro.props;
-const posts = (await getCollection('blog'))
+const all = (await getCollection('blog'))
   .filter((p) => p.data.section === sectionMeta.slug)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const categoryLabels: Record<string, string> = {
-  ranking: 'ランキング',
-  review: 'レビュー',
-  guide: 'ガイド',
-  benchmark: 'ベンチマーク',
-  comparison: '比較',
-  column: 'コラム',
-};
+const rankings = all.filter((p) => p.data.category === 'ranking');
+const reviews = all.filter((p) => p.data.category === 'review');
+const guides = all.filter((p) => p.data.category === 'guide');
+const benchmarks = all.filter((p) => p.data.category === 'benchmark');
+const comparisons = all.filter((p) => p.data.category === 'comparison');
+const columns = all.filter((p) => p.data.category === 'column');
+const top = rankings.slice(0, 3);
 
 const fmtDate = (d: Date) =>
   new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' }).format(d);
+
+const fmtPrice = (yen?: number) => {
+  if (!yen) return null;
+  return `¥${yen.toLocaleString('ja-JP')}`;
+};
+
+const sectionList = [
+  ['ranking', 'ランキング', rankings],
+  ['review', 'レビュー', reviews],
+  ['guide', '選び方ガイド', guides],
+  ['benchmark', 'ベンチマーク', benchmarks],
+  ['comparison', '比較', comparisons],
+  ['column', 'コラム', columns],
+] as const;
 ---
 
 <BaseLayout
   title={`${sectionMeta.title} — mypcrig`}
   description={sectionMeta.description}
 >
-  <header class="py-8 mb-6 border-b border-[var(--color-border)]">
-    <h1 class="text-3xl font-bold mb-2">{sectionMeta.title}</h1>
-    <p class="text-[var(--color-text-muted)]">{sectionMeta.description}</p>
-    <p class="text-sm text-[var(--color-text-muted)] mt-2">{posts.length} 記事</p>
+  <header class="py-12 mb-2 border-b border-[var(--color-border)]">
+    <p class="text-sm text-[var(--color-text-muted)] mb-2">{sectionMeta.headline}</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-3">{sectionMeta.title}</h1>
+    <p class="text-[var(--color-text-muted)] max-w-2xl">{sectionMeta.description}</p>
+    <p class="text-xs text-[var(--color-text-muted)] mt-3">
+      {all.length} 記事 · 最終更新 {all[0] ? fmtDate(all[0].data.date) : '—'}
+    </p>
   </header>
 
-  {posts.length === 0 ? (
-    <div class="py-12 text-center">
+  {top.length > 0 && (
+    <section class="py-10">
+      <h2 class="text-2xl font-bold mb-6">TOP {top.length} ピック</h2>
+      <ol class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {top.map((post, idx) => {
+          const slug = post.id.replace(/^ja\//, '');
+          const rank = idx + 1;
+          const rankColors = [
+            'bg-amber-500/15 border-amber-500/40 text-amber-300',
+            'bg-slate-400/15 border-slate-400/40 text-slate-300',
+            'bg-orange-700/15 border-orange-700/40 text-orange-300',
+          ];
+          return (
+            <li>
+              <a
+                href={`/blog/${slug}/`}
+                class="group block p-5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition h-full"
+              >
+                <div class={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 border ${rankColors[idx]}`}>
+                  No. {rank}
+                </div>
+                {post.data.score !== undefined && (
+                  <div class="mb-2 flex items-baseline gap-2">
+                    <span class="text-3xl font-bold text-[var(--color-accent)]">{post.data.score.toFixed(1)}</span>
+                    <span class="text-xs text-[var(--color-text-muted)]">/ 10</span>
+                    {post.data.score_label && (
+                      <span class="text-xs text-[var(--color-text-muted)]">— {post.data.score_label}</span>
+                    )}
+                  </div>
+                )}
+                <h3 class="text-base font-semibold leading-snug mb-2 group-hover:text-[var(--color-accent)] transition">
+                  {post.data.title}
+                </h3>
+                {post.data.summary_specs.length > 0 && (
+                  <ul class="text-xs text-[var(--color-text-muted)] space-y-1 mb-3">
+                    {post.data.summary_specs.slice(0, 3).map((s) => (
+                      <li class="flex justify-between gap-2">
+                        <span class="opacity-70">{s.label}</span>
+                        <span class="font-medium text-right">{s.value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {post.data.price_yen && (
+                  <p class="text-sm font-semibold text-[var(--color-accent)]">
+                    {fmtPrice(post.data.price_yen)}
+                  </p>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  )}
+
+  {sectionList.map(([key, label, posts]) =>
+    posts.length > 0 && (
+      <section class="py-8 border-t border-[var(--color-border)]">
+        <div class="flex items-baseline justify-between mb-4">
+          <h2 class="text-xl font-bold">{label}</h2>
+          <span class="text-xs text-[var(--color-text-muted)]">{posts.length} 件</span>
+        </div>
+        <ul class="space-y-3">
+          {posts.slice(0, 8).map((post) => {
+            const slug = post.id.replace(/^ja\//, '');
+            return (
+              <li>
+                <a
+                  href={`/blog/${slug}/`}
+                  class="block p-4 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition"
+                >
+                  <div class="flex flex-wrap items-baseline gap-2 mb-1 text-xs text-[var(--color-text-muted)]">
+                    <time>{fmtDate(post.data.date)}</time>
+                    {post.data.tags.slice(0, 3).map((t) => (
+                      <span class="opacity-70">#{t}</span>
+                    ))}
+                  </div>
+                  <h3 class="font-semibold mb-1">{post.data.title}</h3>
+                  <p class="text-sm text-[var(--color-text-muted)] line-clamp-2">{post.data.description}</p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )
+  )}
+
+  {all.length === 0 && (
+    <section class="py-20 text-center">
       <p class="text-[var(--color-text-muted)] mb-6">
         この section の記事は準備中です。
       </p>
@@ -86,26 +198,6 @@ const fmtDate = (d: Date) =>
       >
         診断で構成を提案する →
       </a>
-    </div>
-  ) : (
-    <ul class="space-y-4">
-      {posts.map((post) => {
-        const slug = post.id.replace(/^ja\//, '');
-        return (
-          <li class="p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition">
-            <a href={`/blog/${slug}/`} class="block">
-              <div class="flex flex-wrap gap-2 text-xs text-[var(--color-text-muted)] mb-2">
-                <span class="px-2 py-0.5 rounded bg-[var(--color-bg)]">
-                  {categoryLabels[post.data.category] ?? post.data.category}
-                </span>
-                <time class="ml-auto self-center">{fmtDate(post.data.date)}</time>
-              </div>
-              <h2 class="text-lg font-semibold mb-1 text-[var(--color-text)]">{post.data.title}</h2>
-              <p class="text-sm text-[var(--color-text-muted)]">{post.data.description}</p>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+    </section>
   )}
 </BaseLayout>

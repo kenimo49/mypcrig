@@ -1,35 +1,58 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 
+interface SummarySpec {
+  label: string;
+  value: string;
+}
+
 interface Props {
   title: string;
   description: string;
   date: Date;
+  updated?: Date;
   category: string;
   section: string;
   tags: string[];
   canonical?: string;
   ogImage?: string;
   affiliateDisclosure?: boolean;
+  score?: number;
+  scoreLabel?: string;
+  pros?: string[];
+  cons?: string[];
+  verdict?: string;
+  summarySpecs?: SummarySpec[];
+  priceYen?: number;
+  purchaseUrl?: string;
 }
 
 const {
   title,
   description,
   date,
+  updated,
   category,
   section,
   tags,
   canonical,
   ogImage,
   affiliateDisclosure = true,
+  score,
+  scoreLabel,
+  pros = [],
+  cons = [],
+  verdict,
+  summarySpecs = [],
+  priceYen,
+  purchaseUrl,
 } = Astro.props;
 
-const formattedDate = new Intl.DateTimeFormat('ja-JP', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-}).format(date);
+const fmtDate = (d: Date) =>
+  new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
+
+const fmtPrice = (yen?: number) =>
+  yen ? `¥${yen.toLocaleString('ja-JP')}` : null;
 
 const categoryLabels: Record<string, string> = {
   ranking: 'ランキング',
@@ -49,20 +72,45 @@ const sectionLabels: Record<string, string> = {
   parts: 'パーツ',
   column: 'コラム',
 };
+
+const showSummaryCard =
+  score !== undefined ||
+  pros.length > 0 ||
+  cons.length > 0 ||
+  verdict ||
+  summarySpecs.length > 0 ||
+  priceYen !== undefined;
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
-  <article class="max-w-3xl mx-auto py-8">
+  <article class="max-w-4xl mx-auto py-8">
     <header class="mb-8 pb-6 border-b border-[var(--color-border)]">
+      <nav class="text-xs text-[var(--color-text-muted)] mb-4">
+        <a href="/" class="hover:text-[var(--color-accent)]">トップ</a>
+        <span class="mx-2 opacity-50">›</span>
+        <a href={`/${section}/`} class="hover:text-[var(--color-accent)]">
+          {sectionLabels[section] ?? section}
+        </a>
+        <span class="mx-2 opacity-50">›</span>
+        <span>{categoryLabels[category] ?? category}</span>
+      </nav>
+
       <div class="flex flex-wrap gap-2 text-xs text-[var(--color-text-muted)] mb-3">
-        <a href={`/${section}/`} class="px-2 py-1 rounded bg-[var(--color-surface)] hover:text-[var(--color-accent)]">
+        <a
+          href={`/${section}/`}
+          class="px-2 py-1 rounded bg-[var(--color-surface)] hover:text-[var(--color-accent)]"
+        >
           {sectionLabels[section] ?? section}
         </a>
         <span class="px-2 py-1 rounded bg-[var(--color-surface)]">
           {categoryLabels[category] ?? category}
         </span>
-        <time class="ml-auto self-center">{formattedDate}</time>
+        <time class="ml-auto self-center">{fmtDate(date)}</time>
+        {updated && (
+          <span class="self-center">更新 {fmtDate(updated)}</span>
+        )}
       </div>
+
       <h1 class="text-3xl md:text-4xl font-bold leading-tight">{title}</h1>
       {description && (
         <p class="mt-4 text-[var(--color-text-muted)]">{description}</p>
@@ -84,6 +132,94 @@ const sectionLabels: Record<string, string> = {
       </p>
     )}
 
+    {showSummaryCard && (
+      <aside class="mb-10 p-6 rounded-xl bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg)] border border-[var(--color-border)]">
+        <div class="flex flex-wrap gap-6 items-start">
+          {score !== undefined && (
+            <div class="flex-shrink-0">
+              <div class="flex items-baseline gap-2">
+                <span class="text-5xl font-bold text-[var(--color-accent)]">{score.toFixed(1)}</span>
+                <span class="text-sm text-[var(--color-text-muted)]">/ 10</span>
+              </div>
+              {scoreLabel && (
+                <p class="text-sm text-[var(--color-text-muted)] mt-1">{scoreLabel}</p>
+              )}
+            </div>
+          )}
+
+          <div class="flex-1 min-w-0 space-y-3">
+            {summarySpecs.length > 0 && (
+              <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-sm">
+                {summarySpecs.map((s) => (
+                  <div class="flex justify-between gap-2 py-1 border-b border-[var(--color-border)]/50">
+                    <dt class="text-[var(--color-text-muted)]">{s.label}</dt>
+                    <dd class="font-medium text-right">{s.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+
+            {priceYen !== undefined && (
+              <div class="flex items-center gap-3">
+                <span class="text-2xl font-bold">{fmtPrice(priceYen)}</span>
+                {purchaseUrl && (
+                  <a
+                    href={purchaseUrl}
+                    rel="nofollow sponsored noopener"
+                    class="px-4 py-2 rounded bg-[var(--color-accent)] text-[var(--color-bg)] font-semibold text-sm hover:bg-[var(--color-accent-hover)] transition"
+                  >
+                    最新価格を見る →
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {(pros.length > 0 || cons.length > 0) && (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t border-[var(--color-border)]">
+            {pros.length > 0 && (
+              <div>
+                <h3 class="text-sm font-semibold text-emerald-400 mb-2 flex items-center gap-2">
+                  <span>👍</span> Pros
+                </h3>
+                <ul class="space-y-1 text-sm">
+                  {pros.map((p) => (
+                    <li class="flex gap-2">
+                      <span class="text-emerald-400 flex-shrink-0">＋</span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {cons.length > 0 && (
+              <div>
+                <h3 class="text-sm font-semibold text-rose-400 mb-2 flex items-center gap-2">
+                  <span>👎</span> Cons
+                </h3>
+                <ul class="space-y-1 text-sm">
+                  {cons.map((c) => (
+                    <li class="flex gap-2">
+                      <span class="text-rose-400 flex-shrink-0">−</span>
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
+        {verdict && (
+          <div class="mt-6 pt-6 border-t border-[var(--color-border)]">
+            <h3 class="text-sm font-semibold text-[var(--color-accent)] mb-2">Verdict</h3>
+            <p class="text-sm leading-relaxed">{verdict}</p>
+          </div>
+        )}
+      </aside>
+    )}
+
     <div class="prose prose-invert max-w-none
       prose-headings:text-[var(--color-text)]
       prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[var(--color-border)]
@@ -102,5 +238,16 @@ const sectionLabels: Record<string, string> = {
       prose-blockquote:border-l-[var(--color-accent)] prose-blockquote:text-[var(--color-text-muted)]">
       <slot />
     </div>
+
+    <footer class="mt-16 pt-8 border-t border-[var(--color-border)]">
+      <div class="flex flex-wrap gap-4 justify-between items-center text-sm">
+        <a href={`/${section}/`} class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)]">
+          ← {sectionLabels[section] ?? section} の記事一覧
+        </a>
+        <a href="/match" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)]">
+          PC構成を診断する →
+        </a>
+      </div>
+    </footer>
   </article>
 </BaseLayout>
