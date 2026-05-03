@@ -17,42 +17,48 @@ const sections = [
     title: 'AI開発向け',
     headline: 'ローカルLLMが動くPC',
     description: 'VRAM別の動作モデル / 実機ベンチマーク / Claude Code 快適化',
-    accent: 'from-blue-500/20 to-indigo-500/10',
+    accent: 'from-blue-50 to-indigo-50',
+    border: 'hover:border-blue-400',
   },
   {
     href: '/gaming/',
     title: 'ゲーミングPC',
     headline: 'FPS / MMO / 配信',
     description: '予算別ランキング / フレームレート実測 / 用途別構成',
-    accent: 'from-purple-500/20 to-pink-500/10',
+    accent: 'from-purple-50 to-pink-50',
+    border: 'hover:border-purple-400',
   },
   {
     href: '/laptop/',
     title: 'ノートPC',
     headline: '軽量 / バッテリー / 性能',
     description: '学生・ビジネス・クリエイター向け選び方',
-    accent: 'from-emerald-500/20 to-cyan-500/10',
+    accent: 'from-emerald-50 to-cyan-50',
+    border: 'hover:border-emerald-400',
   },
   {
     href: '/mac/',
     title: 'Mac',
     headline: 'Apple Silicon',
     description: 'M3 / M4 シリーズ徹底比較 / Unified Memory の実力',
-    accent: 'from-slate-500/20 to-zinc-500/10',
+    accent: 'from-slate-50 to-zinc-50',
+    border: 'hover:border-slate-400',
   },
   {
     href: '/desktop/',
     title: 'デスクトップ',
     headline: 'BTO / 自作',
     description: '拡張性と静音性のバランス / コスパ最強構成',
-    accent: 'from-amber-500/20 to-orange-500/10',
+    accent: 'from-amber-50 to-orange-50',
+    border: 'hover:border-amber-400',
   },
   {
     href: '/parts/',
     title: 'パーツ単体',
     headline: 'GPU / CPU / メモリ',
     description: '単品レビュー / 世代比較 / アップグレード指南',
-    accent: 'from-rose-500/20 to-red-500/10',
+    accent: 'from-rose-50 to-red-50',
+    border: 'hover:border-rose-400',
   },
 ];
 
@@ -112,7 +118,7 @@ const sectionLabels: Record<string, string> = {
       {sections.map((s) => (
         <a
           href={s.href}
-          class={`group block p-6 rounded-xl bg-gradient-to-br ${s.accent} border border-[var(--color-border)] hover:border-[var(--color-accent)] transition`}
+          class={`group block p-6 rounded-xl bg-gradient-to-br ${s.accent} border border-[var(--color-border)] ${s.border} transition`}
         >
           <div class="text-xs text-[var(--color-text-muted)] mb-1">{s.title}</div>
           <h3 class="text-xl font-bold mb-3 group-hover:text-[var(--color-accent)] transition">
