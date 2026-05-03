@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'mypcrig — あなたに合うPCを見つける',
+  description = '用途・予算・好みからあなたの rig（PC構成）を診断。AI開発、ゲーミング、クリエイター用途まで実機ベンチマークに基づく推奨。',
+  ogImage = '/og-default.png',
+  canonical,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://mypcrig.com';
+const ogUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const resolvedOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+const gaId = import.meta.env.PUBLIC_GA_ID ?? '';
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={ogUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="mypcrig" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+
+    {gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <Nav />
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <slot />
+    </main>
+    <footer class="border-t border-[var(--color-border)] mt-16 py-8">
+      <div class="mx-auto max-w-6xl px-4 text-sm text-[var(--color-text-muted)] flex flex-wrap gap-x-6 gap-y-2 justify-between">
+        <span>© 2026 mypcrig</span>
+        <span class="flex gap-4">
+          <a href="https://kenimoto.dev" rel="noopener">kenimoto.dev</a>
+          <a href="https://propel-lab.com" rel="noopener">propel-lab</a>
+          <a href="/about">about</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+---
+const sections = [
+  { href: '/match', label: '診断' },
+  { href: '/laptop/', label: 'ノートPC' },
+  { href: '/gaming/', label: 'ゲーミング' },
+  { href: '/ai-dev/', label: 'AI開発' },
+  { href: '/mac/', label: 'Mac' },
+  { href: '/desktop/', label: 'デスクトップ' },
+  { href: '/parts/', label: 'パーツ' },
+  { href: '/column/', label: 'コラム' },
+];
+---
+
+<nav class="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
+  <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between flex-wrap gap-4">
+    <a href="/" class="text-xl font-bold tracking-tight text-[var(--color-text)] hover:text-[var(--color-accent)]">
+      mypcrig
+    </a>
+    <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      {sections.map((s) => (
+        <li>
+          <a href={s.href} class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)]">
+            {s.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,46 @@
+# mypcrig
+
+> あなたに合うPCを見つける。用途別の構成診断と推奨カタログ。
+
+mypcrigは、用途・予算・好みからユーザーに最適なPC構成を提案するPC選定サイトです。AI開発機（ローカルLLM / Claude Code）、ゲーミング、クリエイター用途、ノートPC、Apple Silicon、デスクトップ、パーツ単体まで、構造化されたマッチングロジックで「あなたの rig」を見つけます。
+
+## What mypcrig Does
+
+- 用途×予算×制約から推奨PC構成を提示するマッチング診断
+- AI開発（ローカルLLM、Claude Code、AI画像生成等）に最適なPC/GPU構成の提案
+- 実機ベンチマークデータに基づくレビュー・比較
+- ノートPC・ゲーミングPC・Mac・パーツ単体までカバー
+
+## Site Sections
+
+- /laptop/  — ノートPC全般（学生 / ビジネス / クリエイター）
+- /gaming/  — ゲーミングPC（FPS / MMO / 配信）
+- /ai-dev/  — AI開発向け（ローカルLLM / 画像生成 / ベンチマーク）
+- /mac/     — Apple Silicon
+- /desktop/ — デスクトップ全般
+- /parts/   — パーツ単体（GPU / CPU / メモリ）
+- /column/  — 雑学・基礎知識
+- /match    — マッチング診断UI
+
+## Content Categories
+
+- ranking    — 用途別ランキング
+- review     — 個別機種レビュー
+- guide      — 用途別ガイド・選び方
+- benchmark  — 実機ベンチマーク
+- comparison — 機種・パーツ比較
+- column     — 基礎知識・雑学
+
+## Languages
+
+- 日本語（メイン）
+
+## Related Sites
+
+- ハブメディア: https://kenimoto.dev — AI/LLM の教育・技術コンテンツ
+- 法人サービス: https://propel-lab.com — 企業向けLLM開発環境構築コンサル
+
+## About
+
+運営: Iris (propel-lab) / 監修: ken imoto
+お問い合わせ: kenimoto-dev経由

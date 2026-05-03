@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sections = [
+  {
+    href: '/laptop/',
+    title: 'ノートPC',
+    description: '学生・ビジネス・クリエイター向けの選び方とランキング',
+  },
+  {
+    href: '/gaming/',
+    title: 'ゲーミングPC',
+    description: 'FPS / MMO / 配信に最適な構成。予算別ランキング',
+  },
+  {
+    href: '/ai-dev/',
+    title: 'AI開発向け',
+    description: 'ローカルLLM / Claude Code / AI画像生成の実機ベンチマーク',
+  },
+  {
+    href: '/mac/',
+    title: 'Mac',
+    description: 'Apple Silicon の選び方。M3 / M4 シリーズ徹底比較',
+  },
+  {
+    href: '/desktop/',
+    title: 'デスクトップ',
+    description: 'BTO・自作の構成提案。拡張性と静音性のバランス',
+  },
+  {
+    href: '/parts/',
+    title: 'パーツ単体',
+    description: 'GPU / CPU / メモリの単品レビューと比較',
+  },
+];
+---
+
+<BaseLayout>
+  <section class="py-12 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">あなたに合うPCを見つける</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
+      用途・予算・制約から、あなたの rig（PC構成）を診断。
+      <br />
+      実機ベンチマークに基づいた推奨で、迷いをなくす。
+    </p>
+    <a
+      href="/match"
+      class="inline-block mt-8 px-8 py-3 rounded-lg bg-[var(--color-accent)] text-[var(--color-bg)] font-semibold hover:bg-[var(--color-accent-hover)] transition"
+    >
+      診断を始める →
+    </a>
+  </section>
+
+  <section class="py-12">
+    <h2 class="text-2xl font-bold mb-6">カテゴリで探す</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {sections.map((s) => (
+        <a
+          href={s.href}
+          class="block p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition"
+        >
+          <h3 class="text-lg font-semibold mb-2">{s.title}</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">{s.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-12 border-t border-[var(--color-border)]">
+    <h2 class="text-2xl font-bold mb-4">なぜ mypcrig か</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-[var(--color-text-muted)]">
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[var(--color-text)]">実機ベンチマーク</h3>
+        <p class="text-sm">propel-lab の検証環境で実測したベンチマークデータに基づく推奨。スペックシートだけでは見えない実用性能を反映。</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[var(--color-text)]">用途別マッチング</h3>
+        <p class="text-sm">「ローカルLLMを動かしたい」「動画編集中心」など具体的な用途から、最適な構成を3案提示。</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-2 text-[var(--color-text)]">広告色の薄い独立メディア</h3>
+        <p class="text-sm">アフィリエイトリンクは含みますが、推奨ロジックは性能・コスパ基準。提供記事はゼロ。</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
