@@ -11,7 +11,7 @@ og_image: "/images/blog/local-llm-pc-spec-2026/cover.png"
 affiliate_disclosure: true
 ---
 
-![ローカルLLM PC 最低スペック 2026 ― VRAM階層（8GB→16GB→24GB→48GB→80GB+）](/images/blog/local-llm-pc-spec-2026/cover.png)
+![ローカルLLM PC 最低スペック 2026：VRAM階層（8GB→16GB→24GB→48GB→80GB+）](/images/blog/local-llm-pc-spec-2026/cover.png)
 
 **結論：ローカルLLMを実用的に動かすには最低 VRAM 16GB、本気でやるなら 24GB（RTX 4090 / 5090 級）が必要です。** 70B クラスを高品質で運用したいなら 48GB か、Mac Studio M3 Ultra のようなユニファイドメモリ機を選ぶことになります。
 
