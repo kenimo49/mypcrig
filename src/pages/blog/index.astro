@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categoryLabels: Record<string, string> = {
+  ranking: 'ランキング',
+  review: 'レビュー',
+  guide: 'ガイド',
+  benchmark: 'ベンチマーク',
+  comparison: '比較',
+  column: 'コラム',
+};
+
+const sectionLabels: Record<string, string> = {
+  laptop: 'ノートPC',
+  gaming: 'ゲーミング',
+  'ai-dev': 'AI開発',
+  mac: 'Mac',
+  desktop: 'デスクトップ',
+  parts: 'パーツ',
+  column: 'コラム',
+};
+
+const fmtDate = (d: Date) =>
+  new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' }).format(d);
+---
+
+<BaseLayout
+  title="記事一覧 — mypcrig"
+  description="PC選定・ベンチマーク・用途別ガイドの全記事一覧"
+>
+  <header class="py-8 mb-6 border-b border-[var(--color-border)]">
+    <h1 class="text-3xl font-bold mb-2">記事一覧</h1>
+    <p class="text-[var(--color-text-muted)]">{posts.length} 件</p>
+  </header>
+
+  {posts.length === 0 ? (
+    <p class="py-12 text-center text-[var(--color-text-muted)]">
+      まだ記事はありません。準備中です。
+    </p>
+  ) : (
+    <ul class="space-y-4">
+      {posts.map((post) => {
+        const slug = post.id.replace(/^ja\//, '');
+        return (
+          <li class="p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)] transition">
+            <a href={`/blog/${slug}/`} class="block">
+              <div class="flex flex-wrap gap-2 text-xs text-[var(--color-text-muted)] mb-2">
+                <span class="px-2 py-0.5 rounded bg-[var(--color-bg)]">
+                  {sectionLabels[post.data.section] ?? post.data.section}
+                </span>
+                <span class="px-2 py-0.5 rounded bg-[var(--color-bg)]">
+                  {categoryLabels[post.data.category] ?? post.data.category}
+                </span>
+                <time class="ml-auto self-center">{fmtDate(post.data.date)}</time>
+              </div>
+              <h2 class="text-lg font-semibold mb-1 text-[var(--color-text)]">{post.data.title}</h2>
+              <p class="text-sm text-[var(--color-text-muted)]">{post.data.description}</p>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</BaseLayout>

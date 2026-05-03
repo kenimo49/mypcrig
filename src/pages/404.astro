@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="ページが見つかりません — mypcrig"
+  description="お探しのページは見つかりませんでした。"
+  noindex={true}
+>
+  <section class="py-24 text-center">
+    <p class="text-7xl font-bold text-[var(--color-accent)] mb-4">404</p>
+    <h1 class="text-2xl font-bold mb-4">ページが見つかりません</h1>
+    <p class="text-[var(--color-text-muted)] mb-8 max-w-xl mx-auto">
+      URL が変更されたか、削除された可能性があります。
+    </p>
+    <div class="flex flex-wrap gap-3 justify-center">
+      <a
+        href="/"
+        class="px-6 py-2 rounded bg-[var(--color-accent)] text-[var(--color-bg)] font-semibold hover:bg-[var(--color-accent-hover)]"
+      >
+        トップへ
+      </a>
+      <a
+        href="/blog/"
+        class="px-6 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
+      >
+        記事一覧
+      </a>
+      <a
+        href="/match"
+        class="px-6 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
+      >
+        診断
+      </a>
+    </div>
+  </section>
+</BaseLayout>

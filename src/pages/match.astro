@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="PC構成診断 — mypcrig"
+  description="用途・予算・制約から、あなたに合うPC構成を3案提案します。"
+>
+  <section class="py-16 text-center">
+    <h1 class="text-4xl font-bold mb-4">PC構成診断</h1>
+    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto mb-12">
+      用途・予算・制約をもとに、あなたに合う構成を3案ご提案します。
+    </p>
+
+    <div class="max-w-xl mx-auto p-8 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]">
+      <p class="text-[var(--color-text-muted)] mb-4">
+        診断 UI は現在準備中です。
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)] mb-6">
+        記事ベースの選び方ガイドは公開済みです。下記からご覧ください。
+      </p>
+      <div class="flex flex-wrap gap-3 justify-center text-sm">
+        <a
+          href="/ai-dev/"
+          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
+        >
+          AI開発向け
+        </a>
+        <a
+          href="/laptop/"
+          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
+        >
+          ノートPC
+        </a>
+        <a
+          href="/gaming/"
+          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
+        >
+          ゲーミング
+        </a>
+        <a
+          href="/blog/"
+          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
+        >
+          記事一覧
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

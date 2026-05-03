@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/^ja\//, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const slug = post.id.replace(/^ja\//, '');
+const canonicalUrl = `https://mypcrig.com/blog/${slug}`;
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  category={post.data.category}
+  section={post.data.section}
+  tags={post.data.tags}
+  canonical={canonicalUrl}
+  ogImage={post.data.og_image}
+  affiliateDisclosure={post.data.affiliate_disclosure}
+>
+  <Content />
+</BlogLayout>

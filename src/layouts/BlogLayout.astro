@@ -1,0 +1,106 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  section: string;
+  tags: string[];
+  canonical?: string;
+  ogImage?: string;
+  affiliateDisclosure?: boolean;
+}
+
+const {
+  title,
+  description,
+  date,
+  category,
+  section,
+  tags,
+  canonical,
+  ogImage,
+  affiliateDisclosure = true,
+} = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(date);
+
+const categoryLabels: Record<string, string> = {
+  ranking: 'ランキング',
+  review: 'レビュー',
+  guide: 'ガイド',
+  benchmark: 'ベンチマーク',
+  comparison: '比較',
+  column: 'コラム',
+};
+
+const sectionLabels: Record<string, string> = {
+  laptop: 'ノートPC',
+  gaming: 'ゲーミング',
+  'ai-dev': 'AI開発',
+  mac: 'Mac',
+  desktop: 'デスクトップ',
+  parts: 'パーツ',
+  column: 'コラム',
+};
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
+  <article class="max-w-3xl mx-auto py-8">
+    <header class="mb-8 pb-6 border-b border-[var(--color-border)]">
+      <div class="flex flex-wrap gap-2 text-xs text-[var(--color-text-muted)] mb-3">
+        <a href={`/${section}/`} class="px-2 py-1 rounded bg-[var(--color-surface)] hover:text-[var(--color-accent)]">
+          {sectionLabels[section] ?? section}
+        </a>
+        <span class="px-2 py-1 rounded bg-[var(--color-surface)]">
+          {categoryLabels[category] ?? category}
+        </span>
+        <time class="ml-auto self-center">{formattedDate}</time>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight">{title}</h1>
+      {description && (
+        <p class="mt-4 text-[var(--color-text-muted)]">{description}</p>
+      )}
+      {tags && tags.length > 0 && (
+        <ul class="flex flex-wrap gap-2 mt-4 text-xs">
+          {tags.map((tag) => (
+            <li class="px-2 py-1 rounded text-[var(--color-text-muted)] border border-[var(--color-border)]">
+              #{tag}
+            </li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    {affiliateDisclosure && (
+      <p class="text-xs text-[var(--color-text-muted)] mb-8 p-3 rounded bg-[var(--color-surface)] border border-[var(--color-border)]">
+        本記事は商品リンクにアフィリエイトを含む場合があります。推奨は性能・コスパ基準で行い、提供記事はありません。
+      </p>
+    )}
+
+    <div class="prose prose-invert max-w-none
+      prose-headings:text-[var(--color-text)]
+      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-[var(--color-border)]
+      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+      prose-p:text-[var(--color-text)] prose-p:leading-7
+      prose-a:text-[var(--color-accent)] hover:prose-a:text-[var(--color-accent-hover)]
+      prose-strong:text-[var(--color-text)]
+      prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface)] prose-code:px-1 prose-code:rounded prose-code:before:content-[''] prose-code:after:content-['']
+      prose-pre:bg-[var(--color-surface)] prose-pre:border prose-pre:border-[var(--color-border)]
+      prose-img:rounded-lg
+      prose-ul:text-[var(--color-text)]
+      prose-ol:text-[var(--color-text)]
+      prose-table:text-sm
+      prose-th:text-[var(--color-text)] prose-th:bg-[var(--color-surface)]
+      prose-td:border-[var(--color-border)]
+      prose-blockquote:border-l-[var(--color-accent)] prose-blockquote:text-[var(--color-text-muted)]">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
