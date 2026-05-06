@@ -132,7 +132,7 @@ const showSummaryCard =
     )}
 
     {showSummaryCard && (
-      <aside class="mb-10 p-6 rounded-xl bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg)] border border-[var(--color-border)]">
+      <aside class="mb-10 p-6 bg-[var(--color-surface)] border-l-2 border-[var(--color-accent)]">
         <div class="flex flex-wrap gap-6 items-start">
           {score !== undefined && (
             <div class="flex-shrink-0">
@@ -167,7 +167,7 @@ const showSummaryCard =
                     rel="nofollow sponsored noopener"
                     class="px-4 py-2 rounded bg-[var(--color-accent)] text-[var(--color-bg)] font-semibold text-sm hover:bg-[var(--color-accent-hover)] transition"
                   >
-                    最新価格を見る →
+                    最新価格を見る
                   </a>
                 )}
               </div>
@@ -176,16 +176,14 @@ const showSummaryCard =
         </div>
 
         {(pros.length > 0 || cons.length > 0) && (
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 pt-6 border-t border-[var(--color-border)]">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 pt-6 border-t border-[var(--color-border)]">
             {pros.length > 0 && (
               <div>
-                <h3 class="text-sm font-semibold text-emerald-700 mb-2 flex items-center gap-2">
-                  <span>👍</span> Pros
-                </h3>
-                <ul class="space-y-1 text-sm">
+                <h3 class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-muted)] mb-3">良い点</h3>
+                <ul class="space-y-1.5 text-sm">
                   {pros.map((p) => (
                     <li class="flex gap-2">
-                      <span class="text-emerald-700 flex-shrink-0">＋</span>
+                      <span class="text-[var(--color-accent)] flex-shrink-0 font-bold">＋</span>
                       <span>{p}</span>
                     </li>
                   ))}
@@ -194,13 +192,11 @@ const showSummaryCard =
             )}
             {cons.length > 0 && (
               <div>
-                <h3 class="text-sm font-semibold text-rose-700 mb-2 flex items-center gap-2">
-                  <span>👎</span> Cons
-                </h3>
-                <ul class="space-y-1 text-sm">
+                <h3 class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-muted)] mb-3">気になる点</h3>
+                <ul class="space-y-1.5 text-sm">
                   {cons.map((c) => (
                     <li class="flex gap-2">
-                      <span class="text-rose-700 flex-shrink-0">−</span>
+                      <span class="text-[var(--color-text-muted)] flex-shrink-0 font-bold">−</span>
                       <span>{c}</span>
                     </li>
                   ))}
@@ -212,7 +208,7 @@ const showSummaryCard =
 
         {verdict && (
           <div class="mt-6 pt-6 border-t border-[var(--color-border)]">
-            <h3 class="text-sm font-semibold text-[var(--color-accent)] mb-2">Verdict</h3>
+            <h3 class="text-xs font-semibold tracking-wider uppercase text-[var(--color-text-muted)] mb-2">結論</h3>
             <p class="text-sm leading-relaxed">{verdict}</p>
           </div>
         )}

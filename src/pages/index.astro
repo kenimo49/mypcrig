@@ -17,48 +17,36 @@ const sections = [
     title: 'AI開発向け',
     headline: 'ローカルLLMが動くPC',
     description: 'VRAM別の動作モデル / 実機ベンチマーク / Claude Code 快適化',
-    accent: 'from-blue-50 to-indigo-50',
-    border: 'hover:border-blue-400',
   },
   {
     href: '/gaming/',
     title: 'ゲーミングPC',
     headline: 'FPS / MMO / 配信',
     description: '予算別ランキング / フレームレート実測 / 用途別構成',
-    accent: 'from-purple-50 to-pink-50',
-    border: 'hover:border-purple-400',
   },
   {
     href: '/laptop/',
     title: 'ノートPC',
     headline: '軽量 / バッテリー / 性能',
     description: '学生・ビジネス・クリエイター向け選び方',
-    accent: 'from-emerald-50 to-cyan-50',
-    border: 'hover:border-emerald-400',
   },
   {
     href: '/mac/',
     title: 'Mac',
     headline: 'Apple Silicon',
     description: 'M3 / M4 シリーズ徹底比較 / Unified Memory の実力',
-    accent: 'from-slate-50 to-zinc-50',
-    border: 'hover:border-slate-400',
   },
   {
     href: '/desktop/',
     title: 'デスクトップ',
     headline: 'BTO / 自作',
     description: '拡張性と静音性のバランス / コスパ最強構成',
-    accent: 'from-amber-50 to-orange-50',
-    border: 'hover:border-amber-400',
   },
   {
     href: '/parts/',
     title: 'パーツ単体',
     headline: 'GPU / CPU / メモリ',
     description: '単品レビュー / 世代比較 / アップグレード指南',
-    accent: 'from-rose-50 to-red-50',
-    border: 'hover:border-rose-400',
   },
 ];
 
@@ -125,18 +113,22 @@ const sectionLabels: Record<string, string> = {
   <section class="py-8">
     <h2 class="text-2xl font-bold mb-2">用途で選ぶ</h2>
     <p class="text-sm text-[var(--color-text-muted)] mb-6">あなたの用途を選んでください</p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {sections.map((s) => (
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)] border border-[var(--color-border)]">
+      {sections.map((s, i) => (
         <a
           href={s.href}
-          class={`group block p-6 rounded-xl bg-gradient-to-br ${s.accent} border border-[var(--color-border)] ${s.border} transition`}
+          class="group block p-6 bg-[var(--color-bg)] hover:bg-[var(--color-surface)] transition"
         >
-          <div class="text-xs text-[var(--color-text-muted)] mb-1">{s.title}</div>
-          <h3 class="text-xl font-bold mb-3 group-hover:text-[var(--color-accent)] transition">
+          <div class="flex items-baseline gap-3 mb-3">
+            <span class="font-mono text-xs text-[var(--color-text-muted)] tabular-nums">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="text-xs text-[var(--color-text-muted)]">{s.title}</span>
+          </div>
+          <h3 class="text-xl font-bold mb-2 group-hover:text-[var(--color-accent)] transition">
             {s.headline}
           </h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">{s.description}</p>
-          <div class="mt-4 text-sm text-[var(--color-accent)]">記事を見る →</div>
         </a>
       ))}
     </div>
@@ -147,7 +139,7 @@ const sectionLabels: Record<string, string> = {
       <div class="flex items-baseline justify-between mb-6">
         <h2 class="text-2xl font-bold">注目の記事</h2>
         <a href="/blog/" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)]">
-          すべての記事 →
+          すべての記事
         </a>
       </div>
       <a
@@ -201,23 +193,21 @@ const sectionLabels: Record<string, string> = {
   )}
 
   <section class="py-12 border-t border-[var(--color-border)]">
-    <h2 class="text-2xl font-bold mb-6">なぜ mypcrig か</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]">
-        <div class="text-3xl mb-2">🧪</div>
-        <h3 class="text-lg font-semibold mb-2">実機ベンチマーク</h3>
-        <p class="text-sm text-[var(--color-text-muted)]">propel-lab の検証環境で実測。スペックシートだけでは見えない実用性能を反映します。</p>
+    <h2 class="text-2xl font-bold mb-2">mypcrig が約束する3点</h2>
+    <p class="text-sm text-[var(--color-text-muted)] mb-8">それ以上は約束しない。</p>
+    <dl class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-6">
+      <div class="border-l-2 border-[var(--color-accent)] pl-5">
+        <dt class="text-base font-semibold mb-2">実機で測ってから書く</dt>
+        <dd class="text-sm text-[var(--color-text-muted)] leading-relaxed">propel-lab の検証環境で実測。スペックシートだけでは見えない実用性能を反映する。</dd>
       </div>
-      <div class="p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]">
-        <div class="text-3xl mb-2">🎯</div>
-        <h3 class="text-lg font-semibold mb-2">用途別マッチング</h3>
-        <p class="text-sm text-[var(--color-text-muted)]">「ローカルLLMを動かしたい」「動画編集中心」など、具体的な用途から最適構成を3案提示します。</p>
+      <div class="border-l-2 border-[var(--color-accent)] pl-5">
+        <dt class="text-base font-semibold mb-2">用途から構成を決める</dt>
+        <dd class="text-sm text-[var(--color-text-muted)] leading-relaxed">「ローカルLLMを動かしたい」「動画編集中心」など、用途から最適構成を3案で提示する。</dd>
       </div>
-      <div class="p-5 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]">
-        <div class="text-3xl mb-2">🚫</div>
-        <h3 class="text-lg font-semibold mb-2">提供記事ゼロ</h3>
-        <p class="text-sm text-[var(--color-text-muted)]">アフィリエイトリンクは含みますが、推奨ロジックは性能とコスパ基準。広告主の影響はありません。</p>
+      <div class="border-l-2 border-[var(--color-accent)] pl-5">
+        <dt class="text-base font-semibold mb-2">提供記事は受けない</dt>
+        <dd class="text-sm text-[var(--color-text-muted)] leading-relaxed">アフィリリンクは含む。が、推奨ロジックは性能とコスパだけで決める。広告主の意向は入らない。</dd>
       </div>
-    </div>
+    </dl>
   </section>
 </BaseLayout>
