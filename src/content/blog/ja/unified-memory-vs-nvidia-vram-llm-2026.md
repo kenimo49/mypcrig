@@ -133,5 +133,3 @@ NVIDIA 側でどのカードを選ぶかについては「[RTX 5090 vs RTX 4090 
 - [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)
 - [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/)
 - [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)
-
-法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。Mac Studio クラスタによる大規模 Unified Memory 推論環境から、Blackwell B200 ノードを使った学習基盤まで、用途と予算に合わせた構築を支援しています。

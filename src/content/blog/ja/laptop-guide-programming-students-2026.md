@@ -159,5 +159,3 @@ iOS / macOS アプリ開発は Mac 必須です。それ以外でも、Apple Sil
 
 - [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/) -- AI/ML を本気でやりたい学生向け
 - [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac 派でメモリ周りを詳しく知りたい人向け
-
-法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。

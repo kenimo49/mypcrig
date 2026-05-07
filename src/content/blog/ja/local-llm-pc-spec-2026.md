@@ -144,5 +144,3 @@ NVIDIA 系との違いはこんな感じです：
 ## 関連記事
 
 - [AI開発向けPC 記事一覧](/ai-dev/)
-
-法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。
