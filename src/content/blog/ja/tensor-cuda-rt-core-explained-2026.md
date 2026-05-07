@@ -1,9 +1,9 @@
 ---
-title: "Tensor Core / CUDA Core / RT Core の違い 2026年版 — Blackwell世代で何が変わったか"
+title: "Tensor Core / CUDA Core / RT Core の違い 2026年版：Blackwell世代で何が変わったか"
 description: "GPUのスペック表に並ぶ Tensor Core / CUDA Core / RT Core の3つは何が違うのか。汎用計算・AI推論・レイトレーシングそれぞれの役割と、Blackwell世代で導入されたFP4/FP6対応・第5世代Tensor Core・Tensor Memoryまで、PC選びに直結する形で解説します。"
 date: 2026-05-07
 lang: ja
-category: column
+category: comparison
 section: column
 tags: ["Tensor Core", "CUDA Core", "RT Core", "Blackwell", "RTX 5090", "GPU 仕組み", "FP4", "DLSS"]
 featured: false
@@ -159,8 +159,8 @@ GPU のスペック表でこれら3つを見るときは、「うちのチーム
 
 ## 関連記事
 
-- [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/ja/vram-explained-llm-inference-2026/) — 姉妹記事:GPU の「メモリ」軸
-- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/ja/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) — Blackwell世代の選定実例
-- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/ja/unified-memory-vs-nvidia-vram-llm-2026/) — Mac勢の補完軸
+- [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/ja/vram-explained-llm-inference-2026/) -- 姉妹記事:GPU の「メモリ」軸
+- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/ja/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) -- Blackwell世代の選定実例
+- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/ja/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac勢の補完軸
 
 法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。

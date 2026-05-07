@@ -1,5 +1,5 @@
 ---
-title: "プログラミング学習向けノートPCの選び方ガイド 2026年版 — 大学生・新人エンジニア向け"
+title: "プログラミング学習向けノートPCの選び方ガイド 2026年版:大学生・新人エンジニア向け"
 description: "プログラミング学習を始める大学生・新人エンジニア向けに、ノートPC選定の判断軸を整理。Core Ultra / Ryzen AI 世代のCPU選び、メモリ16GB vs 32GB、SSD容量、画面サイズ、学割の使い方まで、2026年5月時点の価格相場と具体構成例を交えて解説します。"
 date: 2026-05-07
 lang: ja
@@ -51,7 +51,7 @@ Snapdragon X 系は省電力とバッテリー持ちで魅力的ですが、Linu
 - **32GB**：将来 LLM ローカル推論や動画編集も視野に入れるなら推奨
 - **64GB 以上**：ノートでは選択肢が限られる、デスクトップ向きの帯
 
-Apple Silicon Mac は **Unified Memory** という仕組みで、CPU と GPU が同じメモリ空間を共有します。同じ「16GB」でも、Windows ノートの 16GB より体感の余裕があるのはこのためです。Mac の 16GB と Windows の 24GB が体感ほぼ互角、というのが筆者の印象です。
+Apple Silicon Mac は **Unified Memory** という仕組みで、CPU と GPU が同じメモリ空間を共有します。同じ「16GB」でも、Windows ノートの 16GB より体感の余裕があるのはこのためです。Mac の 16GB と Windows の 24GB が体感ほぼ互角、というのが私の印象です。
 
 ローカルで LLM を動かすところまで踏み込みたい人は、別記事「[ローカルLLMを動かすPCの最低スペック 2026年版](/blog/ja/local-llm-pc-spec-2026/)」も読んでおくと判断軸が整理できます。
 
@@ -157,7 +157,7 @@ iOS / macOS アプリ開発は Mac 必須です。それ以外でも、Apple Sil
 
 ## 関連記事
 
-- [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/ja/local-llm-pc-spec-2026/) — AI/ML を本気でやりたい学生向け
-- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/ja/unified-memory-vs-nvidia-vram-llm-2026/) — Mac 派でメモリ周りを詳しく知りたい人向け
+- [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/ja/local-llm-pc-spec-2026/) -- AI/ML を本気でやりたい学生向け
+- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/ja/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac 派でメモリ周りを詳しく知りたい人向け
 
 法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。
