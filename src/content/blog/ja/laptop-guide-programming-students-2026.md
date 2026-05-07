@@ -53,7 +53,7 @@ Snapdragon X 系は省電力とバッテリー持ちで魅力的ですが、Linu
 
 Apple Silicon Mac は **Unified Memory** という仕組みで、CPU と GPU が同じメモリ空間を共有します。同じ「16GB」でも、Windows ノートの 16GB より体感の余裕があるのはこのためです。Mac の 16GB と Windows の 24GB が体感ほぼ互角、というのが私の印象です。
 
-ローカルで LLM を動かすところまで踏み込みたい人は、別記事「[ローカルLLMを動かすPCの最低スペック 2026年版](/blog/ja/local-llm-pc-spec-2026/)」も読んでおくと判断軸が整理できます。
+ローカルで LLM を動かすところまで踏み込みたい人は、別記事「[ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/)」も読んでおくと判断軸が整理できます。
 
 ## SSD と画面サイズ
 
@@ -157,7 +157,7 @@ iOS / macOS アプリ開発は Mac 必須です。それ以外でも、Apple Sil
 
 ## 関連記事
 
-- [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/ja/local-llm-pc-spec-2026/) -- AI/ML を本気でやりたい学生向け
-- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/ja/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac 派でメモリ周りを詳しく知りたい人向け
+- [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/) -- AI/ML を本気でやりたい学生向け
+- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac 派でメモリ周りを詳しく知りたい人向け
 
 法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。

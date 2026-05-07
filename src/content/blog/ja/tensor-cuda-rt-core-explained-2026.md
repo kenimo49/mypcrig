@@ -110,7 +110,7 @@ RTX 5090 はこの SM を 170 個積んでいます。CUDA Core 総数 21,760、
 
 - **見るべき指標**：Tensor Core 世代と FP4 / FP8 対応
 - **目安**：Blackwell 世代 (第5世代 Tensor Core) が圧倒的優位。FP4 ハードウェアサポートは LLM 推論の新基準
-- **VRAM も合わせて見る**：[VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/ja/vram-explained-llm-inference-2026/)
+- **VRAM も合わせて見る**：[VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)
 
 ### ゲーム主用途
 
@@ -127,7 +127,7 @@ RTX 5090 はこの SM を 170 個積んでいます。CUDA Core 総数 21,760、
 - **見るべき指標**：CUDA Core 数とブースト クロック
 - **目安**：シミュレーション系は CUDA Core 数とメモリ帯域が効く
 
-具体的な機種選びは「[RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell 2026年版](/blog/ja/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」で詳しく扱っています。
+具体的な機種選びは「[RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」で詳しく扱っています。
 
 ## 「Tensor Core が多いほど AI が速い」は本当か
 
@@ -159,8 +159,8 @@ GPU のスペック表でこれら3つを見るときは、「うちのチーム
 
 ## 関連記事
 
-- [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/ja/vram-explained-llm-inference-2026/) -- 姉妹記事:GPU の「メモリ」軸
-- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/ja/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) -- Blackwell世代の選定実例
-- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/ja/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac勢の補完軸
+- [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/) -- 姉妹記事:GPU の「メモリ」軸
+- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) -- Blackwell世代の選定実例
+- [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac勢の補完軸
 
 法人で AI開発環境を構築する方は [propel-lab](https://propel-lab.co.jp) へ。
