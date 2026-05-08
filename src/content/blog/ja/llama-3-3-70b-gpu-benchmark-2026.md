@@ -1,12 +1,12 @@
 ---
-title: "Llama 3.3 70B を各GPUで動かしたトークン/秒 2026年版：RTX 5090 / PRO 6000 / Mac Studio 実測比較"
+title: "Llama 3.3 70B GPU別トークン/秒 2026年版（5090 / PRO 6000 / Mac）"
 description: "Llama 3.3 70B Q4 を実際に動かしたとき、RTX 5090 / RTX PRO 6000 Blackwell / Mac Studio M3 Ultra でトークン/秒はどれだけ違うのか。公開ベンチと実測報告を横断集約し、量子化精度・コンテキスト長・バックエンドごとの速度差を整理しました。"
 date: 2026-05-08
 lang: ja
 category: benchmark
 section: ai-dev
 tags: ["Llama 3.3", "ローカルLLM", "RTX 5090", "RTX PRO 6000", "Mac Studio", "M3 Ultra", "トークン毎秒", "GPUベンチマーク"]
-featured: false
+featured: true
 og_image: "/images/blog/llama-3-3-70b-gpu-benchmark-2026/cover.png"
 affiliate_disclosure: true
 ---
@@ -98,7 +98,7 @@ VRAM が 80GB 級ないと現実的ではありません。RTX PRO 6000 Blackwel
 
 「とりあえず 70B を高速で回したい」なら 5090、「速度を妥協して FP16 を 1 台で扱いたい」なら Mac Studio、「両方欲しい」なら PRO 6000、という三択です。Mac Studio は重戦車、5090 はスポーツカー、PRO 6000 は両用 SUV、と言い換えても大きく外しません。
 
-価格帯は GPU 単品で次の通りです。実勢価格の詳しい動きは別記事「[RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」で扱っています。
+価格帯は GPU 単品で次の通りです。実勢価格の詳しい動きは別記事「[RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」で扱っています。
 
 - RTX 5090：55〜62万円（AIB 抽選販売）
 - RTX PRO 6000 Blackwell：130〜160万円（B2B / ワークステーション経由）
@@ -128,11 +128,11 @@ VRAM が 80GB 級ないと現実的ではありません。RTX PRO 6000 Blackwel
 
 用途や予算をもう少し細かく入力すると、3つの候補構成を提案します。
 
-→ [診断スタート](/match)
+→ [診断スタート](/match/)
 
 ## 関連記事
 
 - [ローカルLLMを動かすPCの最低スペック 2026年版：Llama 3.3 70B が動くまで](/blog/local-llm-pc-spec-2026/)
-- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)
+- [RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)
 - [Apple Silicon の Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/)
 - [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)

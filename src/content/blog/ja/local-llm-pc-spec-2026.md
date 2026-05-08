@@ -35,7 +35,7 @@ affiliate_disclosure: true
 | Q8 | 8 | 約 74GB | ほぼ非量子化 |
 | FP16 | 16 | 約 140GB | フル品質 |
 
-「Q4_K_M」が消費者向けハードでの定番です。Q3 まで落とすと回答の論理が時々崩れる印象、Q5 まで上げるとほぼ FP16 と区別がつかなくなります。
+「Q4_K_M」が消費者向けハードでの定番です。Q3 まで落とすと回答の論理が時々崩れる印象、Q5 まで上げるとほぼ FP16 と区別がつかなくなります。VRAM の中身（重み・KVキャッシュ・アクティベーション）と量子化の仕組みについては「[VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)」で詳しく扱っています。
 
 ## VRAM 別：実際に動くモデル一覧（2026年5月時点）
 
@@ -50,7 +50,7 @@ affiliate_disclosure: true
 
 8GB は「動くけど 7B 以下に限られる」帯。16GB が「ローカルLLMで普段使いできる」最低ライン、24GB が「70B クラスにギリギリ手が届く」境目、48GB 以上で「品質を犠牲にしなくていい」世界に入ります。
 
-なお VRAM の中身については、別記事のコラムで改めて詳しく扱う予定です。本記事ではざっくり「重み + KVキャッシュ」で覚えておけば十分です。
+なお VRAM の中身については、別記事「[VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)」で詳しく扱っています。本記事ではざっくり「重み + KVキャッシュ」で覚えておけば十分です。
 
 ## 推奨構成 3パターン
 
@@ -85,6 +85,8 @@ affiliate_disclosure: true
 
 新品の入手性と将来の Blackwell 世代のサポートを考えると 5090 が筋ですが、コスパだけで言えば中古 4090 もまだ十分戦えます。電源は 5090 の TDP 575W に対応するため 1200W 級を推奨します。電源容量を削るとピーク時に落ちるので、ここはケチらないほうがよい場所です。
 
+5090 / 4090 / RTX PRO 6000 の AI 用途比較は「[RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」で詳しく整理しています。Llama 3.3 70B の GPU 別実測トークン/秒は「[Llama 3.3 70B GPU別トークン/秒 2026年版](/blog/llama-3-3-70b-gpu-benchmark-2026/)」を参照してください。
+
 [RTX 5090 を Amazon で見る](https://www.amazon.co.jp/s?k=RTX+5090)
 [DDR5 64GB キット を Amazon で見る](https://www.amazon.co.jp/s?k=DDR5+64GB+%E3%82%AD%E3%83%83%E3%83%88)
 
@@ -98,7 +100,7 @@ affiliate_disclosure: true
 
 Mac Studio M3 Ultra 192GB は「メモリ帯域 800GB/s」「ユニファイドメモリ 192GB」という構成で、70B クラスはもちろん DeepSeek-V3 のような巨大モデルも乗ります。トークン速度では NVIDIA の最上位機に及びませんが、消費電力・静音性・セットアップの簡単さで頭ひとつ抜けます。
 
-「速度より、巨大モデルがとにかく動くこと」を優先するならこの選択肢です。逆に「速度こそ正義、Llama 70B FP16 を 30 tok/s で回したい」なら、H100 80GB の中古かクラウド GPU のほうが現実的になります。
+「速度より、巨大モデルがとにかく動くこと」を優先するならこの選択肢です。逆に「速度こそ正義、Llama 70B FP16 を 30 tok/s で回したい」なら、H100 80GB の中古かクラウド GPU のほうが現実的になります。Apple Silicon の Unified Memory と NVIDIA VRAM の構造比較は「[Apple Silicon の Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/)」で詳しく扱っています。
 
 ## CPU・メモリ・電源の補足
 
@@ -139,8 +141,14 @@ NVIDIA 系との違いはこんな感じです：
 
 用途や予算をもう少し細かく入力すると、3つの候補構成を提案します。
 
-→ [診断スタート](/match)
+→ [診断スタート](/match/)
 
 ## 関連記事
 
+- [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/) — VRAM 容量論の基礎、計算式と早見表
+- [Llama 3.3 70B GPU別トークン/秒 2026年版](/blog/llama-3-3-70b-gpu-benchmark-2026/) — GPU別の実測速度比較
+- [RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) — Blackwell 世代の選定実例
+- [Apple Silicon の Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/) — Mac/NVIDIA の構造的違い
+- [Tensor Core / CUDA Core / RT Core の違い 2026年版](/blog/tensor-cuda-rt-core-explained-2026/) — GPU コア種別の役割
+- [Claude Code を快適に動かすPC構成 2026年版（必要スペック）](/blog/claude-code-pc-spec-benchmark-2026/) — クラウドAIだけ使う場合の構成
 - [AI開発向けPC 記事一覧](/ai-dev/)

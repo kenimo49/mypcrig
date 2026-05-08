@@ -1,9 +1,15 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { categoryLabels, sectionLabels } from '../data/sections';
 
 interface SummarySpec {
   label: string;
   value: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
 }
 
 interface Props {
@@ -25,6 +31,7 @@ interface Props {
   summarySpecs?: SummarySpec[];
   priceYen?: number;
   purchaseUrl?: string;
+  faq?: FaqItem[];
 }
 
 const {
@@ -46,6 +53,7 @@ const {
   summarySpecs = [],
   priceYen,
   purchaseUrl,
+  faq = [],
 } = Astro.props;
 
 const fmtDate = (d: Date) =>
@@ -54,24 +62,6 @@ const fmtDate = (d: Date) =>
 const fmtPrice = (yen?: number) =>
   yen ? `¥${yen.toLocaleString('ja-JP')}` : null;
 
-const categoryLabels: Record<string, string> = {
-  ranking: 'ランキング',
-  review: 'レビュー',
-  guide: 'ガイド',
-  benchmark: 'ベンチマーク',
-  comparison: '比較',
-};
-
-const sectionLabels: Record<string, string> = {
-  laptop: 'ノートPC',
-  gaming: 'ゲーミング',
-  'ai-dev': 'AI開発',
-  mac: 'Mac',
-  desktop: 'デスクトップ',
-  parts: 'パーツ',
-  column: 'コラム',
-};
-
 const showSummaryCard =
   score !== undefined ||
   pros.length > 0 ||
@@ -79,9 +69,135 @@ const showSummaryCard =
   verdict ||
   summarySpecs.length > 0 ||
   priceYen !== undefined;
+
+const siteUrl = 'https://mypcrig.com';
+const pageUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImageAbs = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href)
+  : new URL('/og-default.png', siteUrl).href;
+
+const breadcrumbItems = [
+  { name: 'トップ', url: `${siteUrl}/` },
+  {
+    name: sectionLabels[section] ?? section,
+    url: `${siteUrl}/${section}/`,
+  },
+  { name: title, url: pageUrl },
+];
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  image: ogImageAbs,
+  datePublished: date.toISOString(),
+  ...(updated ? { dateModified: updated.toISOString() } : { dateModified: date.toISOString() }),
+  author: {
+    '@type': 'Person',
+    name: 'ken imoto',
+    url: 'https://kenimoto.dev/',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'mypcrig',
+    url: siteUrl,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': pageUrl,
+  },
+  ...(tags && tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems.map((b, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: b.name,
+    item: b.url,
+  })),
+};
+
+const productJsonLd =
+  category === 'review' && score !== undefined
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: title,
+        description,
+        image: ogImageAbs,
+        ...(priceYen
+          ? {
+              offers: {
+                '@type': 'Offer',
+                priceCurrency: 'JPY',
+                price: priceYen,
+                ...(purchaseUrl ? { url: purchaseUrl } : {}),
+                availability: 'https://schema.org/InStock',
+              },
+            }
+          : {}),
+        review: {
+          '@type': 'Review',
+          reviewRating: {
+            '@type': 'Rating',
+            ratingValue: score,
+            bestRating: 10,
+            worstRating: 0,
+          },
+          author: {
+            '@type': 'Person',
+            name: 'ken imoto',
+          },
+          ...(verdict ? { reviewBody: verdict } : {}),
+          ...(pros.length > 0 ? { positiveNotes: { '@type': 'ItemList', itemListElement: pros.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p })) } } : {}),
+          ...(cons.length > 0 ? { negativeNotes: { '@type': 'ItemList', itemListElement: cons.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c })) } } : {}),
+        },
+      }
+    : null;
+
+const faqJsonLd =
+  faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: f.answer,
+          },
+        })),
+      }
+    : null;
+
+const jsonLd = [
+  articleJsonLd,
+  breadcrumbJsonLd,
+  ...(productJsonLd ? [productJsonLd] : []),
+  ...(faqJsonLd ? [faqJsonLd] : []),
+];
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  ogImage={ogImage}
+  jsonLd={jsonLd}
+  ogType="article"
+  articleMeta={{
+    publishedTime: date.toISOString(),
+    modifiedTime: (updated ?? date).toISOString(),
+    author: 'ken imoto',
+    section: sectionLabels[section] ?? section,
+    tags,
+  }}
+>
   <article class="max-w-4xl mx-auto py-8">
     <header class="mb-8 pb-6 border-b border-[var(--color-border)]">
       <nav class="text-xs text-[var(--color-text-muted)] mb-4">
@@ -90,8 +206,12 @@ const showSummaryCard =
         <a href={`/${section}/`} class="hover:text-[var(--color-accent)]">
           {sectionLabels[section] ?? section}
         </a>
-        <span class="mx-2 opacity-50">›</span>
-        <span>{categoryLabels[category] ?? category}</span>
+        {section !== 'column' && (
+          <>
+            <span class="mx-2 opacity-50">›</span>
+            <span>{categoryLabels[category] ?? category}</span>
+          </>
+        )}
       </nav>
 
       <div class="flex flex-wrap gap-2 text-xs text-[var(--color-text-muted)] mb-3">
@@ -127,7 +247,7 @@ const showSummaryCard =
 
     {affiliateDisclosure && (
       <p class="text-xs text-[var(--color-text-muted)] mb-8 p-3 rounded bg-[var(--color-surface)] border border-[var(--color-border)]">
-        本記事は商品リンクにアフィリエイトを含む場合があります。推奨は性能・コスパ基準で行い、提供記事はありません。
+        本記事は Amazon.co.jp および各販売店のアフィリエイトリンクを含む場合があります。推奨は性能・コスパ・実機ベンチマーク基準で編集判断しており、提供記事は受け付けていません。詳細は <a href="/privacy/" class="text-[var(--color-accent)] hover:underline">プライバシーポリシー</a> をご覧ください。
       </p>
     )}
 

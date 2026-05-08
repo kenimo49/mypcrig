@@ -9,42 +9,77 @@ export async function getStaticPaths() {
       title: 'ノートPC',
       description: '学生・ビジネス・クリエイター向けノートPCの選び方とランキング',
       headline: '軽量 / バッテリー / 性能',
+      questions: [
+        '学生・新人エンジニアが最初に買うべきノートPCは？',
+        'メモリ 16GB と 32GB、どちらが必要？',
+        'MacBook と Windows ノート、開発でどちらが向く？',
+      ],
     },
     {
       slug: 'gaming',
       title: 'ゲーミングPC',
       description: 'FPS / MMO / 配信に最適な構成。予算別ランキング',
       headline: 'FPS / MMO / 配信',
+      questions: [
+        '競技FPS で 240fps 出すには何が必要？',
+        '4K 144Hz には RTX 5080 / 5090 のどちら？',
+        'ゲーム配信併用なら CPU はどこまで盛るべき？',
+      ],
     },
     {
       slug: 'ai-dev',
       title: 'AI開発向け',
       description: 'ローカルLLM / Claude Code / AI画像生成の実機ベンチマーク',
       headline: 'ローカルLLMが動くPC',
+      questions: [
+        'Llama 3.3 70B を快適に動かすには何 GB の VRAM が必要？',
+        'RTX 5090 と Mac Studio M3 Ultra、AI 用途で結局どっち？',
+        'Claude Code を快適に動かすメモリ・CPU は？',
+      ],
     },
     {
       slug: 'mac',
       title: 'Mac',
       description: 'Apple Silicon の選び方。M3 / M4 シリーズ徹底比較',
       headline: 'Apple Silicon',
+      questions: [
+        'Unified Memory は VRAM の代わりになる？',
+        'M3 Ultra と M4 Max、AI 用途で選ぶなら？',
+        'MacBook Pro と Mac Studio、開発機としてどちらが向く？',
+      ],
     },
     {
       slug: 'desktop',
       title: 'デスクトップ',
       description: 'BTO・自作の構成提案。拡張性と静音性のバランス',
       headline: 'BTO / 自作',
+      questions: [
+        'BTO と自作、結局どっちが得？',
+        '初心者は BTO 一択？自作で組むなら何から？',
+        'マウス / ドスパラ / フロンティア、どこで買うべき？',
+      ],
     },
     {
       slug: 'parts',
       title: 'パーツ単体',
       description: 'GPU / CPU / メモリの単品レビューと比較',
       headline: 'GPU / CPU / メモリ',
+      questions: [
+        'RTX 5090 / 4090 / PRO 6000 の VRAM 差は何が違う？',
+        'ゲーム用 CPU なら Ryzen X3D は本当に必須？',
+        'DDR5 32GB と 64GB、どちらを選ぶべき？',
+      ],
     },
     {
       slug: 'column',
       title: 'コラム',
       description: '雑学・基礎知識。スペックの読み方を体系的に',
       headline: '基礎から学ぶ',
+      questions: [
+        'VRAM とは何か？必要量はどう決まる？',
+        'Tensor Core / CUDA Core / RT Core の違いは？',
+        'スペック表の数字、どこを見れば実用性能がわかる？',
+      ],
     },
   ];
 
@@ -95,6 +130,22 @@ const sectionList = [
       {all.length} 記事 · 最終更新 {all[0] ? fmtDate(all[0].data.date) : '—'}
     </p>
   </header>
+
+  {sectionMeta.questions && sectionMeta.questions.length > 0 && (
+    <section class="py-8">
+      <h2 class="text-sm font-semibold tracking-wider uppercase text-[var(--color-text-muted)] mb-4">
+        この {sectionMeta.title} で答えること
+      </h2>
+      <ul class="space-y-2">
+        {sectionMeta.questions.map((q) => (
+          <li class="flex gap-2 text-sm">
+            <span class="text-[var(--color-accent)] flex-shrink-0">Q.</span>
+            <span>{q}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 
   {top.length > 0 && (
     <section class="py-10">

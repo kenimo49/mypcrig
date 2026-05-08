@@ -155,10 +155,10 @@ GPU のスペック表でこれら3つを見るときは、「うちのチーム
 
 用途や予算をもう少し細かく入力すると、3つの候補構成を提案します。
 
-→ [診断スタート](/match)
+→ [診断スタート](/match/)
 
 ## 関連記事
 
 - [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/) -- 姉妹記事:GPU の「メモリ」軸
-- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) -- Blackwell世代の選定実例
+- [RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/) -- Blackwell世代の選定実例
 - [Apple Silicon Unified Memory vs NVIDIA VRAM 2026年版](/blog/unified-memory-vs-nvidia-vram-llm-2026/) -- Mac勢の補完軸

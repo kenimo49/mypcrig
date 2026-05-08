@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { homeSectionCards as sections, sectionLabels, categoryLabels } from '../data/sections';
 
 const allPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -11,65 +12,41 @@ const latestPosts = allPosts.slice(0, 6);
 const fmtDate = (d: Date) =>
   new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' }).format(d);
 
-const sections = [
-  {
-    href: '/ai-dev/',
-    title: 'AI開発向け',
-    headline: 'ローカルLLMが動くPC',
-    description: 'VRAM別の動作モデル / 実機ベンチマーク / Claude Code 快適化',
+const siteUrl = 'https://mypcrig.com';
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'mypcrig',
+  alternateName: 'あなたに合うPCを見つける',
+  url: `${siteUrl}/`,
+  description: '用途・予算・好みからPC構成を診断。実機ベンチマークに基づく推奨。',
+  inLanguage: 'ja-JP',
+  publisher: {
+    '@type': 'Organization',
+    name: 'mypcrig',
+    url: `${siteUrl}/`,
   },
-  {
-    href: '/gaming/',
-    title: 'ゲーミングPC',
-    headline: 'FPS / MMO / 配信',
-    description: '予算別ランキング / フレームレート実測 / 用途別構成',
-  },
-  {
-    href: '/laptop/',
-    title: 'ノートPC',
-    headline: '軽量 / バッテリー / 性能',
-    description: '学生・ビジネス・クリエイター向け選び方',
-  },
-  {
-    href: '/mac/',
-    title: 'Mac',
-    headline: 'Apple Silicon',
-    description: 'M3 / M4 シリーズ徹底比較 / Unified Memory の実力',
-  },
-  {
-    href: '/desktop/',
-    title: 'デスクトップ',
-    headline: 'BTO / 自作',
-    description: '拡張性と静音性のバランス / コスパ最強構成',
-  },
-  {
-    href: '/parts/',
-    title: 'パーツ単体',
-    headline: 'GPU / CPU / メモリ',
-    description: '単品レビュー / 世代比較 / アップグレード指南',
-  },
-];
-
-const categoryLabels: Record<string, string> = {
-  ranking: 'ランキング',
-  review: 'レビュー',
-  guide: 'ガイド',
-  benchmark: 'ベンチマーク',
-  comparison: '比較',
 };
-
-const sectionLabels: Record<string, string> = {
-  laptop: 'ノートPC',
-  gaming: 'ゲーミング',
-  'ai-dev': 'AI開発',
-  mac: 'Mac',
-  desktop: 'デスクトップ',
-  parts: 'パーツ',
-  column: 'コラム',
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'mypcrig',
+  url: `${siteUrl}/`,
+  logo: `${siteUrl}/favicon-512x512.png`,
+  founder: {
+    '@type': 'Person',
+    name: 'ken imoto',
+    url: 'https://kenimoto.dev/',
+  },
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'propel-lab',
+    url: 'https://propel-lab.co.jp/',
+  },
 };
 ---
 
-<BaseLayout>
+<BaseLayout jsonLd={[websiteJsonLd, orgJsonLd]}>
   <section class="py-12 md:py-20 text-center">
     <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
       あなたに合うPCを<br class="md:hidden" />見つける

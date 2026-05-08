@@ -118,7 +118,7 @@ Llama 3.3 70B（または 3.1 70B）を Q4_K_M で動かしたときの推論速
 
 VRAM 側の数値の決まり方そのものについては「[VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)」で詳しく扱っています。GPU を選ぶ手前の段階でこの記事に戻ってきていただけると、必要量の見積もりが楽になります。
 
-NVIDIA 側でどのカードを選ぶかについては「[RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」、PC 全体構成の最低スペックについては「[ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/)」がそれぞれ続編として読めます。
+NVIDIA 側でどのカードを選ぶかについては「[RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)」、PC 全体構成の最低スペックについては「[ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/)」がそれぞれ続編として読めます。
 
 ---
 
@@ -126,10 +126,10 @@ NVIDIA 側でどのカードを選ぶかについては「[RTX 5090 vs RTX 4090 
 
 用途や予算をもう少し細かく入力すると、3つの候補構成を提案します。
 
-→ [診断スタート](/match)
+→ [診断スタート](/match/)
 
 ## 関連記事
 
 - [VRAMとは何か。ローカルLLM推論で必要な量の決まり方 2026年版](/blog/vram-explained-llm-inference-2026/)
 - [ローカルLLMを動かすPCの最低スペック 2026年版](/blog/local-llm-pc-spec-2026/)
-- [RTX 5090 vs RTX 4090 vs RTX PRO 6000 Blackwell：AI用途で選ぶGPU 2026年版](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)
+- [RTX 5090 vs 4090 vs PRO 6000 — AI用途で選ぶGPU 2026](/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/)

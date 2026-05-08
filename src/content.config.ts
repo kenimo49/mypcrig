@@ -28,10 +28,6 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
     canonical_url: z.string().url().optional(),
-    cross_posted_to: z.array(z.object({
-      platform: z.string(),
-      url: z.string().url(),
-    })).default([]),
     og_image: z.string().optional(),
     affiliate_disclosure: z.boolean().default(true),
 
@@ -47,6 +43,12 @@ const blog = defineCollection({
     })).default([]),
     price_yen: z.number().optional(),
     purchase_url: z.string().url().optional(),
+
+    // FAQPage JSON-LD 用 (任意)
+    faq: z.array(z.object({
+      question: z.string(),
+      answer: z.string(),
+    })).default([]),
   }),
 });
 

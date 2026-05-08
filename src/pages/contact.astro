@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="お問い合わせ — mypcrig"
+  description="mypcrig へのお問い合わせ。取材・記事内容のご指摘・メーカー検証機提供・広告掲載のご相談はメールでお寄せください。"
+>
+  <article class="max-w-3xl mx-auto py-8 prose
+    prose-headings:text-[var(--color-text)]
+    prose-p:text-[var(--color-text)] prose-p:leading-7
+    prose-a:text-[var(--color-accent)] hover:prose-a:text-[var(--color-accent-hover)]
+    prose-strong:text-[var(--color-text)]
+    prose-ul:text-[var(--color-text)]">
+    <h1>お問い合わせ</h1>
+
+    <p>
+      mypcrig へのお問い合わせは、以下のメールアドレスにご連絡ください。営業日 3 日以内に回答することを目安としていますが、内容によっては時間をいただく場合があります。
+    </p>
+
+    <div class="not-prose my-6 p-6 rounded-lg bg-[var(--color-surface)] border-l-2 border-[var(--color-accent)]">
+      <p class="text-xs tracking-wider uppercase text-[var(--color-text-muted)] mb-2">連絡先</p>
+      <p class="text-lg font-semibold mb-1">
+        <a href="mailto:info@propel-lab.co.jp" class="text-[var(--color-accent)] hover:underline">info@propel-lab.co.jp</a>
+      </p>
+      <p class="text-sm text-[var(--color-text-muted)]">運営: ken imoto / propel-lab</p>
+    </div>
+
+    <h2>お問い合わせ内容の例</h2>
+
+    <h3>記事内容に関するご指摘・修正依頼</h3>
+    <p>
+      記事内のスペック・価格・ベンチマーク数値に誤りがあった場合のご連絡を歓迎します。確認のうえ、必要であれば記事を更新します。該当 URL と該当箇所を明記してご連絡ください。
+    </p>
+
+    <h3>メーカー検証機の提供・取材依頼</h3>
+    <p>
+      実機検証用のサンプル機（PC 本体・GPU・CPU・メモリ・ストレージ等）の提供やレビュー依頼については、提供条件・返却条件・公開時期等についてご相談ください。提供の有無は記事の評価結果に影響しません。広告主の意向で記事内容を変更することはありません（提供記事は受け付けていません）。
+    </p>
+
+    <h3>法人向けコンサルティング</h3>
+    <p>
+      LLM 開発環境構築（オンプレミス GPU サーバ、ローカル LLM 運用、AI ワークフロー設計等）に関するご相談は、運営元の <a href="https://propel-lab.co.jp" rel="noopener">propel-lab</a> までご連絡ください。
+    </p>
+
+    <h3>広告掲載・タイアップ</h3>
+    <p>
+      広告掲載・タイアップ記事のご依頼については、原則として「提供記事は受け付けない」方針で運営しています。バナー広告等の純広告については別途ご相談に応じます。
+    </p>
+
+    <h3>その他</h3>
+    <p>
+      上記以外のお問い合わせもメールにて承ります。お気軽にご連絡ください。
+    </p>
+
+    <h2>関連ページ</h2>
+    <ul>
+      <li><a href="/about/">mypcrig について（編集方針・運営情報）</a></li>
+      <li><a href="/privacy/">プライバシーポリシー</a></li>
+    </ul>
+  </article>
+</BaseLayout>

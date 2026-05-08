@@ -1,27 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categoryLabels, sectionLabels } from '../../data/sections';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const categoryLabels: Record<string, string> = {
-  ranking: 'ランキング',
-  review: 'レビュー',
-  guide: 'ガイド',
-  benchmark: 'ベンチマーク',
-  comparison: '比較',
-};
-
-const sectionLabels: Record<string, string> = {
-  laptop: 'ノートPC',
-  gaming: 'ゲーミング',
-  'ai-dev': 'AI開発',
-  mac: 'Mac',
-  desktop: 'デスクトップ',
-  parts: 'パーツ',
-  column: 'コラム',
-};
 
 const fmtDate = (d: Date) =>
   new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' }).format(d);

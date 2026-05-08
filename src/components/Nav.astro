@@ -1,14 +1,5 @@
 ---
-const sections = [
-  { href: '/match/', label: '診断' },
-  { href: '/laptop/', label: 'ノートPC' },
-  { href: '/gaming/', label: 'ゲーミング' },
-  { href: '/ai-dev/', label: 'AI開発' },
-  { href: '/mac/', label: 'Mac' },
-  { href: '/desktop/', label: 'デスクトップ' },
-  { href: '/parts/', label: 'パーツ' },
-  { href: '/column/', label: 'コラム' },
-];
+import { navItems } from '../data/sections';
 ---
 
 <nav class="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
@@ -17,7 +8,7 @@ const sections = [
       mypcrig
     </a>
     <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-      {sections.map((s) => (
+      {navItems.map((s) => (
         <li>
           <a href={s.href} class="text-[var(--color-text-muted)] hover:text-[var(--color-accent)]">
             {s.label}

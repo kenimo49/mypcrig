@@ -13,7 +13,13 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const slug = post.id.replace(/^ja\//, '');
-const canonicalUrl = `https://mypcrig.com/blog/${slug}`;
+const canonicalUrl = post.data.canonical_url ?? `https://mypcrig.com/blog/${slug}/`;
+
+// 商業リンク検出（自動 disclosure 強制表示）
+const COMMERCE_HOST_PATTERN = /https?:\/\/(?:www\.)?(?:amazon\.co\.jp|amzn\.to|amzn\.asia|mouse-jp\.co\.jp|dospara\.co\.jp|kakaku\.com)/;
+const hasCommerceLinks = COMMERCE_HOST_PATTERN.test(post.body ?? '');
+// frontmatter で false に設定しても、商業リンクがあれば必ず表示
+const showDisclosure = hasCommerceLinks || post.data.affiliate_disclosure;
 ---
 
 <BlogLayout
@@ -26,7 +32,7 @@ const canonicalUrl = `https://mypcrig.com/blog/${slug}`;
   tags={post.data.tags}
   canonical={canonicalUrl}
   ogImage={post.data.og_image}
-  affiliateDisclosure={post.data.affiliate_disclosure}
+  affiliateDisclosure={showDisclosure}
   score={post.data.score}
   scoreLabel={post.data.score_label}
   pros={post.data.pros}
@@ -35,6 +41,7 @@ const canonicalUrl = `https://mypcrig.com/blog/${slug}`;
   summarySpecs={post.data.summary_specs}
   priceYen={post.data.price_yen}
   purchaseUrl={post.data.purchase_url}
+  faq={post.data.faq}
 >
   <Content />
 </BlogLayout>

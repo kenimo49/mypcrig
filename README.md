@@ -44,6 +44,18 @@ PC選定サイト（mypcrig.com）— 独立メディアとして運用。
 - 記事生成: harness-ops 自動投稿（1日1本）
 - アフィリリンク: Amazon Creators API + 楽天 OpenAPI
 
+## 必要な GitHub Actions vars
+
+- `PUBLIC_GA_ID` — GA4 測定 ID
+- `PUBLIC_AMAZON_TAG` — Amazon Associates タグ（例: `kenimo49-22`）。`src/lib/remark-affiliate.mjs` がビルド時に Amazon URL に `?tag=...` を注入する。未設定でもビルドは通るが、収益化されないので必須
+
+## SEO / LLMO 構成
+
+- 記事ページ: Article + BreadcrumbList JSON-LD（review カテゴリは Product+Review、`faq` を持つ記事は FAQPage も）
+- トップ: WebSite + Organization JSON-LD
+- `public/llms.txt` + `dist/llms-full.txt`（ビルド時自動生成）で AI 検索引用に対応
+- Amazon / マウス / ドスパラ / Apple リンクは remark プラグインで `rel="nofollow sponsored noopener" target="_blank"` 自動付与
+
 ## 関連リポジトリ（運用上の依存）
 
 - [iris-hub](https://github.com/kenimo49/iris-hub) — 戦略・タスク管理

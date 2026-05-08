@@ -1,50 +1,229 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const recommendations = [
+  {
+    id: 'ai-dev-entry',
+    use: 'ai-dev',
+    budget: 'low',
+    title: 'AI開発・入門（VRAM 16-24GB）',
+    summary: 'コード補完・小規模 LLM・画像生成を始める構成。RTX 4070 Ti SUPER / 5070 Ti クラスから。',
+    primary: { label: 'まずはこの記事', href: '/blog/local-llm-pc-spec-2026/' },
+    related: [
+      { label: 'VRAM の決まり方', href: '/blog/vram-explained-llm-inference-2026/' },
+    ],
+  },
+  {
+    id: 'ai-dev-mid',
+    use: 'ai-dev',
+    budget: 'mid',
+    title: 'AI開発・標準（VRAM 24-32GB）',
+    summary: '70B Q4 を実用域で回す。RTX 5090 32GB or Mac Studio M3 Ultra。',
+    primary: { label: 'まずはこの記事', href: '/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/' },
+    related: [
+      { label: 'Llama 3.3 70B 実測比較', href: '/blog/llama-3-3-70b-gpu-benchmark-2026/' },
+      { label: 'Apple Silicon vs NVIDIA', href: '/blog/unified-memory-vs-nvidia-vram-llm-2026/' },
+    ],
+  },
+  {
+    id: 'ai-dev-pro',
+    use: 'ai-dev',
+    budget: 'high',
+    title: 'AI開発・本格（VRAM 48GB+）',
+    summary: 'ファインチューン・大規模モデル安定運用。RTX PRO 6000 96GB or Mac Studio M3 Ultra 256-512GB。',
+    primary: { label: 'まずはこの記事', href: '/blog/rtx-5090-vs-4090-vs-pro-6000-ai-2026/' },
+    related: [
+      { label: 'Unified Memory の容量優位', href: '/blog/unified-memory-vs-nvidia-vram-llm-2026/' },
+    ],
+  },
+  {
+    id: 'gaming-low',
+    use: 'gaming',
+    budget: 'low',
+    title: 'ゲーミング・WQHD 144Hz 帯',
+    summary: 'RTX 5070 + Ryzen 7 7800X3D / 1440p 144fps を多くのタイトルで安定。',
+    primary: { label: 'まずはこの記事', href: '/blog/gaming-pc-guide-2026/' },
+    related: [
+      { label: 'BTO vs 自作', href: '/blog/bto-vs-jisaku-pc-2026/' },
+    ],
+  },
+  {
+    id: 'gaming-mid',
+    use: 'gaming',
+    budget: 'mid',
+    title: 'ゲーミング・4K + 配信併用',
+    summary: 'RTX 5080 + 9800X3D / 4K 高設定 + OBS 配信を 1 台でこなす。',
+    primary: { label: 'まずはこの記事', href: '/blog/gaming-pc-guide-2026/' },
+    related: [
+      { label: 'Tensor / CUDA / RT Core の役割', href: '/blog/tensor-cuda-rt-core-explained-2026/' },
+    ],
+  },
+  {
+    id: 'gaming-high',
+    use: 'gaming',
+    budget: 'high',
+    title: 'ゲーミング・4K 240Hz 限界突破',
+    summary: 'RTX 5090 + 9800X3D / DLSS 4 + パストレ込みで 4K 高 fps。',
+    primary: { label: 'まずはこの記事', href: '/blog/gaming-pc-guide-2026/' },
+    related: [
+      { label: 'BTO vs 自作', href: '/blog/bto-vs-jisaku-pc-2026/' },
+    ],
+  },
+  {
+    id: 'work-low',
+    use: 'work',
+    budget: 'low',
+    title: '仕事・学習用ノート（10万円台）',
+    summary: 'Core Ultra 7 / Ryzen AI 7 + 16-32GB / SSD 512GB の標準ノート。',
+    primary: { label: 'まずはこの記事', href: '/blog/laptop-guide-programming-students-2026/' },
+    related: [],
+  },
+  {
+    id: 'work-mid',
+    use: 'work',
+    budget: 'mid',
+    title: '仕事・Claude Code を快適に',
+    summary: 'メモリ 32-64GB / SSD 1TB+ / Apple Silicon または Ryzen 9 デスクトップ。',
+    primary: { label: 'まずはこの記事', href: '/blog/claude-code-pc-spec-benchmark-2026/' },
+    related: [
+      { label: '学生向けノート選び', href: '/blog/laptop-guide-programming-students-2026/' },
+    ],
+  },
+  {
+    id: 'work-high',
+    use: 'work',
+    budget: 'high',
+    title: '仕事・クリエイター/動画編集',
+    summary: 'Mac Studio M3 Ultra か RTX 5080+ デスクトップ。Unified Memory or VRAM 16GB+。',
+    primary: { label: 'まずはこの記事', href: '/blog/unified-memory-vs-nvidia-vram-llm-2026/' },
+    related: [
+      { label: 'BTO vs 自作', href: '/blog/bto-vs-jisaku-pc-2026/' },
+    ],
+  },
+];
 ---
 
 <BaseLayout
   title="PC構成診断 — mypcrig"
-  description="用途・予算・制約から、あなたに合うPC構成を3案提案します。"
+  description="用途と予算からあなたに合うPC構成の方向性を3秒で。実機ベンチマーク記事に紐づけて提示します。"
 >
-  <section class="py-16 text-center">
-    <h1 class="text-4xl font-bold mb-4">PC構成診断</h1>
-    <p class="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto mb-12">
-      用途・予算・制約をもとに、あなたに合う構成を3案ご提案します。
+  <section class="py-10">
+    <h1 class="text-3xl md:text-4xl font-bold mb-3">PC構成診断</h1>
+    <p class="text-[var(--color-text-muted)] max-w-2xl">
+      用途と予算をクリックするだけで、最適な構成方向と該当する実機検証記事を提示します。
     </p>
+  </section>
 
-    <div class="max-w-xl mx-auto p-8 rounded-lg bg-[var(--color-surface)] border border-[var(--color-border)]">
-      <p class="text-[var(--color-text-muted)] mb-4">
-        診断 UI は現在準備中です。
-      </p>
-      <p class="text-sm text-[var(--color-text-muted)] mb-6">
-        記事ベースの選び方ガイドは公開済みです。下記からご覧ください。
-      </p>
-      <div class="flex flex-wrap gap-3 justify-center text-sm">
-        <a
-          href="/ai-dev/"
-          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
-        >
-          AI開発向け
-        </a>
-        <a
-          href="/laptop/"
-          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
-        >
-          ノートPC
-        </a>
-        <a
-          href="/gaming/"
-          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
-        >
-          ゲーミング
-        </a>
-        <a
-          href="/blog/"
-          class="px-4 py-2 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]"
-        >
-          記事一覧
-        </a>
-      </div>
+  <section class="py-4">
+    <h2 class="text-sm font-semibold tracking-wider uppercase text-[var(--color-text-muted)] mb-3">用途</h2>
+    <div role="radiogroup" aria-label="用途" class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-8" id="use-group">
+      <button type="button" data-use="ai-dev" class="match-opt p-4 rounded border border-[var(--color-border)] text-left hover:border-[var(--color-accent)] transition">
+        <span class="font-semibold block">AI開発</span>
+        <span class="text-xs text-[var(--color-text-muted)]">ローカルLLM / 画像生成 / Claude Code</span>
+      </button>
+      <button type="button" data-use="gaming" class="match-opt p-4 rounded border border-[var(--color-border)] text-left hover:border-[var(--color-accent)] transition">
+        <span class="font-semibold block">ゲーミング</span>
+        <span class="text-xs text-[var(--color-text-muted)]">FPS / MMO / 配信</span>
+      </button>
+      <button type="button" data-use="work" class="match-opt p-4 rounded border border-[var(--color-border)] text-left hover:border-[var(--color-accent)] transition">
+        <span class="font-semibold block">仕事・学習</span>
+        <span class="text-xs text-[var(--color-text-muted)]">プログラミング / 動画編集 / 一般</span>
+      </button>
+    </div>
+
+    <h2 class="text-sm font-semibold tracking-wider uppercase text-[var(--color-text-muted)] mb-3">予算</h2>
+    <div role="radiogroup" aria-label="予算" class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-8" id="budget-group">
+      <button type="button" data-budget="low" class="match-opt p-4 rounded border border-[var(--color-border)] text-left hover:border-[var(--color-accent)] transition">
+        <span class="font-semibold block">〜20万円</span>
+        <span class="text-xs text-[var(--color-text-muted)]">最小限から始める</span>
+      </button>
+      <button type="button" data-budget="mid" class="match-opt p-4 rounded border border-[var(--color-border)] text-left hover:border-[var(--color-accent)] transition">
+        <span class="font-semibold block">20-50万円</span>
+        <span class="text-xs text-[var(--color-text-muted)]">バランス重視</span>
+      </button>
+      <button type="button" data-budget="high" class="match-opt p-4 rounded border border-[var(--color-border)] text-left hover:border-[var(--color-accent)] transition">
+        <span class="font-semibold block">50万円〜</span>
+        <span class="text-xs text-[var(--color-text-muted)]">本格運用</span>
+      </button>
     </div>
   </section>
+
+  <section
+    id="match-result"
+    class="py-8 border-t border-[var(--color-border)] hidden"
+    aria-live="polite"
+  ></section>
+
+  <section class="py-12 border-t border-[var(--color-border)]">
+    <h2 class="text-xl font-bold mb-4">用途領域から探す</h2>
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+      <li><a href="/ai-dev/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">AI開発</a></li>
+      <li><a href="/gaming/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">ゲーミング</a></li>
+      <li><a href="/laptop/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">ノートPC</a></li>
+      <li><a href="/mac/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">Mac</a></li>
+      <li><a href="/desktop/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">デスクトップ</a></li>
+      <li><a href="/parts/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">パーツ</a></li>
+      <li><a href="/column/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">コラム</a></li>
+      <li><a href="/blog/" class="block p-3 rounded border border-[var(--color-border)] hover:border-[var(--color-accent)]">全記事</a></li>
+    </ul>
+  </section>
+
+  <script is:inline define:vars={{ recommendations }}>
+    const state = { use: null, budget: null };
+    const result = document.getElementById('match-result');
+    const accent = 'border-[var(--color-accent)]';
+
+    function pick() {
+      if (!state.use || !state.budget) return null;
+      return recommendations.find((r) => r.use === state.use && r.budget === state.budget);
+    }
+
+    function render() {
+      const r = pick();
+      if (!r) {
+        result.classList.add('hidden');
+        result.innerHTML = '';
+        return;
+      }
+      result.classList.remove('hidden');
+      const relatedHtml = r.related
+        .map((l) => `<li><a href="${l.href}" class="text-[var(--color-accent)] hover:underline">${l.label}</a></li>`)
+        .join('');
+      result.innerHTML = `
+        <div class="p-6 rounded-lg bg-[var(--color-surface)] border-l-2 border-[var(--color-accent)]">
+          <p class="text-xs tracking-wider uppercase text-[var(--color-text-muted)] mb-2">推奨方向</p>
+          <h2 class="text-xl md:text-2xl font-bold mb-2">${r.title}</h2>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">${r.summary}</p>
+          <a href="${r.primary.href}" class="inline-block px-5 py-2 rounded bg-[var(--color-accent)] text-[var(--color-bg)] font-semibold text-sm hover:bg-[var(--color-accent-hover)] transition">
+            ${r.primary.label} →
+          </a>
+          ${
+            relatedHtml
+              ? `<div class="mt-5 pt-5 border-t border-[var(--color-border)]">
+                   <p class="text-xs text-[var(--color-text-muted)] mb-2">あわせて読みたい</p>
+                   <ul class="space-y-1 text-sm">${relatedHtml}</ul>
+                 </div>`
+              : ''
+          }
+        </div>`;
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function bind(group, key) {
+      const el = document.getElementById(`${group}-group`);
+      el.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-' + key + ']');
+        if (!btn) return;
+        state[key] = btn.dataset[key];
+        el.querySelectorAll('button').forEach((b) => {
+          b.classList.remove('border-[var(--color-accent)]', 'bg-[var(--color-surface)]');
+        });
+        btn.classList.add('border-[var(--color-accent)]', 'bg-[var(--color-surface)]');
+        render();
+      });
+    }
+
+    bind('use', 'use');
+    bind('budget', 'budget');
+  </script>
 </BaseLayout>
